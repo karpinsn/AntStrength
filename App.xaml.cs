@@ -50,6 +50,12 @@ namespace AntStrength
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
+                WorkoutDataSource workoutDataSource = (WorkoutDataSource)App.Current.Resources["workoutDataSource"];
+                if (null != workoutDataSource)
+                {
+                  workoutDataSource.GetData();
+                }
+
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
