@@ -39,8 +39,8 @@
         <ColumnDefinition Width="Auto"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
-      <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{Binding Group.Title}" Style="{StaticResource PageHeaderTextStyle}"/>
-      <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="182,44,0,0" TextWrapping="Wrap" Text="Ant Strength" VerticalAlignment="Top" FontSize="72" Width="418"/>
+      <Button        x:Name="backButton"        Click="GoBack"        IsEnabled="{Binding DefaultViewModel.CanGoBack, ElementName=pageRoot}"        Style="{StaticResource BackButtonStyle}"/>
+        <TextBlock x:Name="pageTitle" Grid.Column="1" Text="Ant Strength" Style="{StaticResource PageHeaderTextStyle}"/>
     </Grid>
 
     <!-- Vertical scrolling item list -->
@@ -50,12 +50,12 @@
             AutomationProperties.Name="Items"
             TabIndex="1"
             Grid.Row="1"
-            Margin="-10,-10,0,0"
+            Margin="0,0,0,0"
             Padding="120,0,0,60"
             ItemsSource="{Binding Source={StaticResource itemsViewSource}}"
             IsSwipeEnabled="False"
             SelectionChanged="ItemListView_SelectionChanged"
-            ItemTemplate="{StaticResource Standard130ItemTemplate}"/>
+            ItemTemplate="{StaticResource WorkoutEntry}"/>
 
     <!-- Details for selected item -->
     <ScrollViewer

@@ -53,7 +53,7 @@ namespace AntStrength
                 WorkoutDataSource workoutDataSource = (WorkoutDataSource)App.Current.Resources["workoutDataSource"];
                 if (null != workoutDataSource)
                 {
-                  workoutDataSource.GetData();
+                  workoutDataSource.LoadData();
                 }
 
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)

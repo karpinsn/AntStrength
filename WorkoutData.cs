@@ -46,7 +46,7 @@ namespace AntStrength
       get { return this._WorkoutData; }
     }
 
-    public void GetData( )
+    public void LoadData( )
     {
       LiftingSet set1 = new LiftingSet( );
       set1.Weight = 50;
@@ -57,8 +57,23 @@ namespace AntStrength
 
       WorkoutData data = new WorkoutData( );
       data.Lifts.Add( lift );
+      data.Date = new DateTime(2013, 1, 3);
+
+      LiftingSet set2 = new LiftingSet();
+      set2.Weight = 50;
+      set2.Reps = 5;
+      Lift lift2 = new Lift();
+      lift2.Name = "Overhead Press";
+      lift2.Sets.Add(set1);
+
+      WorkoutData data2 = new WorkoutData();
+      data2.Lifts.Add(lift2);
+      data2.Date = new DateTime(2013, 1, 5);
+
+
 
       this.WorkoutData.Add( data );
+      this.WorkoutData.Add(data2);
     }
   }
 }

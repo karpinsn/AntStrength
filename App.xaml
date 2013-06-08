@@ -13,7 +13,8 @@
                     Required by Visual Studio project and item templates
                  -->
                 <ResourceDictionary Source="Common/StandardStyles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Common/AntStrengthCustomStyles.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
 
       <local:WorkoutDataSource x:Key="workoutDataSource"/>
     </ResourceDictionary>
