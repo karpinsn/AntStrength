@@ -5,8 +5,8 @@
   
   <DataTemplate x:Key="WorkoutEntry">    
     <Grid Height="110" Width="110" Margin="10">
-      <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Date.Day}" VerticalAlignment="Top" Width="100" FontSize="72"/>
-      <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Date.DayOfWeek}" VerticalAlignment="Bottom" Width="90" FontSize="18"/>
+      <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Date.Day}" VerticalAlignment="Top" FontSize="72"/>
+      <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Date.DayOfWeek}" VerticalAlignment="Bottom" FontSize="20"/>
     </Grid>
   </DataTemplate>
 
