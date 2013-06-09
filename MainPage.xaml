@@ -66,12 +66,14 @@
             ItemsSource="{Binding Source={StaticResource workingSetLog}}">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
-            <chart:Chart>
-              <chart:LineSeries
-                Title="Title"
-                IndependentValueBinding="{Binding Weight}"
-                DependentValueBinding="{Binding Date}"
-                IsSelectionEnabled="False"/>
+            <chart:Chart Title="{Binding Name}">
+              <chart:Chart.Series>
+                  <chart:PieSeries
+                  ItemsSource="{Binding DateWeight}"
+                  IndependentValueBinding="{Binding Item1}"
+                  DependentValueBinding="{Binding Item2}"
+                  IsSelectionEnabled="False"/>
+              </chart:Chart.Series>
             </chart:Chart>
           </DataTemplate>
         </ItemsControl.ItemTemplate>

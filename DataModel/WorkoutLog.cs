@@ -40,9 +40,18 @@ namespace AntStrength.DataModel
 
   public class WorkingSetLog
   {
-    public DateTime Date { get; set; }
     public string Name { get; set; }
-    public int Weight { get; set; }
+    private List<Tuple<DateTime, int>> _DateWeight = new List<Tuple<DateTime, int>>();
+    public List<Tuple<DateTime, int>> DateWeight
+    {
+      get { return this._DateWeight; }
+    }
+
+    public WorkingSetLog(string name, Tuple<DateTime, int> dateWeight)
+    {
+      this.Name = name;
+      _DateWeight.Add(dateWeight);
+    }
   }
 
   public class WorkoutDataViewModel
@@ -56,10 +65,7 @@ namespace AntStrength.DataModel
     private ObservableCollection<WorkingSetLog> _WorkingSetLog = new ObservableCollection<WorkingSetLog>();
     public ObservableCollection<WorkingSetLog> WorkingSetLog
     {
-      get
-      {
-        return _WorkingSetLog;
-      }
+      get { return _WorkingSetLog; }
     }
 
     public WorkoutDataViewModel()
@@ -75,16 +81,25 @@ namespace AntStrength.DataModel
       {
         case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
           // Add the new lifts to our working set log
-          var newLog = sender as ObservableCollection<WorkoutLog>;
-          if (null == newLog)
-            { throw new NotImplementedException(); }
 
-          foreach (var log in newLog)
+          foreach (var newItem in e.NewItems)
           {
-            var lifts = (from l in log.Lifts select l.Name).Distinct();
-            foreach( var lift in lifts)
+            var log = newItem as WorkoutLog;
+            var workingSets = (from lift in log.Lifts select new { lift.Name, Weight = lift.Sets.Max(w => w.Weight) } );
+
+            foreach( var set in workingSets)
             {
-              WorkingSetLog.Add(new WorkingSetLog { Date = log.Date, Name = lift, Weight = 40 });
+              var dateWeights = ( from workingSetLog in _WorkingSetLog where workingSetLog.Name == set.Name select workingSetLog.DateWeight );
+              if(dateWeights.Any())
+              {
+                // Add our working set
+                dateWeights.First().Add( new Tuple<DateTime,int>(log.Date, set.Weight ) );
+              }
+              else
+              {
+                // No existing working set. Add one
+                WorkingSetLog.Add(new WorkingSetLog(set.Name, new Tuple<DateTime, int>(log.Date, set.Weight))); 
+              }
             }
           }
 
