@@ -7,6 +7,7 @@
     xmlns:local="using:AntStrength"
     xmlns:data="using:AntStrength.DataModel"
     xmlns:common="using:AntStrength.Common"
+    xmlns:chart="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -16,8 +17,8 @@
     <!-- Collection of items displayed by this page -->
     <CollectionViewSource
             x:Name="workoutDataSource"
-            Source="{Binding WorkoutData}"
-            d:Source="{Binding WorkoutData, Source={d:DesignInstance Type=data:DesignModeWorkoutData, IsDesignTimeCreatable=True}}"
+            Source="{Binding WorkoutLog}"
+            d:Source="{Binding WorkoutLog, Source={d:DesignInstance Type=data:DesignModeWorkoutLog, IsDesignTimeCreatable=True}}"
     />
     
     <common:LiftingSet2StringConverter x:Key="liftSet2String"/>
@@ -52,24 +53,33 @@
     <Grid x:Name="contentPanel" Grid.Row="1">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="600"/>
-        <ColumnDefinition Width="150"/>
+        <ColumnDefinition Width="Auto"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
 
-    <!-- Vertical scrolling item list -->
+      <ListView
+            x:Name="progressListView">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <chart:Chart>
+              
+            </chart:Chart>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+       
+        <!-- Vertical scrolling item list -->
     <ListView
             x:Name="workoutListView"
             AutomationProperties.AutomationId="WorkoutListView"
             AutomationProperties.Name="Items"
             TabIndex="1"
             Grid.Column="1"
-            Margin="0,0,0,0"
-            Padding="0,0,0,0"
             ItemsSource="{Binding Source={StaticResource workoutDataSource}}"
             IsSwipeEnabled="False"
             SelectionChanged="WorkoutListView_SelectionChanged"
             ItemTemplate="{StaticResource WorkoutEntry}"/>
-
+      
     <!-- Details for selected item -->
     <ScrollViewer
             x:Name="workoutDetail"
@@ -94,12 +104,12 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                   </Grid.RowDefinitions>
-                  
-                  <TextBlock Text="{Binding Name}"/>
+
+                  <TextBlock Text="{Binding Name}" Style="{StaticResource LiftTextStyle}" Margin="10,0,0,0"/>
                   <ItemsControl Grid.Row="1" ItemsSource="{Binding Sets}">
                     <ItemsControl.ItemTemplate>
                       <DataTemplate>
-                        <TextBlock Text="{Binding Converter={StaticResource liftSet2String}}"/>
+                        <TextBlock Text="{Binding Converter={StaticResource liftSet2String}}" Style="{StaticResource LiftSetTextStyle}" Margin="20,0,0,0"/>
                       </DataTemplate>
                     </ItemsControl.ItemTemplate>
                   </ItemsControl>

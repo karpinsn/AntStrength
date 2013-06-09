@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AntStrength.DataModel
 {
-  public class DesignModeWorkoutData : WorkoutDataViewModel
+  public class DesignModeWorkoutLog : WorkoutDataViewModel
   {
-    public DesignModeWorkoutData()
+    public DesignModeWorkoutLog()
     {
-      WorkoutData data = new WorkoutData();
+      WorkoutLog data = new WorkoutLog();
       Lift lift1 = new Lift();
       lift1.Name = "Overhead Press";
       lift1.Sets.Add(new LiftingSet { Weight = 50, Reps = 5 });
@@ -26,9 +26,9 @@ namespace AntStrength.DataModel
       data.Lifts.Add(lift2);
 
       data.Date = new DateTime(2013, 1, 3);
-      this.WorkoutData.Add(data);
+      this.WorkoutLog.Add(data);
 
-      WorkoutData data2 = new WorkoutData();
+      WorkoutLog data2 = new WorkoutLog();
 
       Lift lift3 = new Lift();
       lift3.Name = "Bench Press";
@@ -38,7 +38,25 @@ namespace AntStrength.DataModel
       data2.Lifts.Add(lift3);
 
       data2.Date = new DateTime(2013, 1, 5);
-      this.WorkoutData.Add(data2);
+      this.WorkoutLog.Add(data2);
+
+      WorkoutLog data3 = new WorkoutLog();
+      Lift lift4 = new Lift();
+      lift4.Name = "Overhead Press";
+      lift4.Sets.Add(new LiftingSet { Weight = 45, Reps = 5 });
+      lift4.Sets.Add(new LiftingSet { Weight = 55, Reps = 5 });
+      lift4.Sets.Add(new LiftingSet { Weight = 65, Reps = 5 });
+      data3.Lifts.Add(lift4);
+
+      Lift lift5 = new Lift();
+      lift5.Name = "Deadlift";
+      lift5.Sets.Add(new LiftingSet { Weight = 125, Reps = 5 });
+      lift5.Sets.Add(new LiftingSet { Weight = 215, Reps = 5 });
+      lift5.Sets.Add(new LiftingSet { Weight = 175, Reps = 3 });
+      data3.Lifts.Add(lift5);
+
+      data3.Date = new DateTime(2013, 1, 1);
+      this.WorkoutLog.Add(data3);
     }
   }
 }

@@ -48,7 +48,7 @@ namespace AntStrength
       WorkoutDataSource dataSource = (WorkoutDataSource)App.Current.Resources["workoutDataSource"];
 
       if (null != dataSource)
-      { this.DefaultViewModel["WorkoutData"] = dataSource.WorkoutData; }
+      { this.DefaultViewModel["WorkoutLog"] = dataSource.WorkoutLog; }
 
       if (pageState == null)
       {
