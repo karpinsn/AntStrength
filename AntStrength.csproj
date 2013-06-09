@@ -110,6 +110,7 @@
     <Compile Include="Common\LiftingSet2StringConverter.cs" />
     <Compile Include="Common\RichTextColumns.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="DataModel\DesignModeWorkoutData.cs" />
     <Compile Include="DataModel\WorkoutData.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

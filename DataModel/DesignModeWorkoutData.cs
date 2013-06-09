@@ -1,55 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AntStrength.DataModel
 {
-  // Workout
-  // - Multiple lifts
-  // - - Each lift has multiple setst
-  // - - - Each set has multiple reps at specific weight
-  public class WorkoutData
+  public class DesignModeWorkoutData : WorkoutDataViewModel
   {
-    public DateTime Date { get; set; }
-    private List<Lift> _Lifts = new List<Lift>( );
-    public List<Lift> Lifts 
-    {
-      get { return this._Lifts; }
-    }
-  }
-
-  // Holds info for a single lift
-  public class Lift
-  {
-    public string Name { get; set; }
-    private List<LiftingSet> _Sets = new List<LiftingSet>();
-    public List<LiftingSet> Sets
-    {
-      get { return this._Sets; }
-    }
-  }
-
-  public class LiftingSet
-  {
-    public int Weight { get; set; }
-    public int Reps { get; set; }
-  }
-
-  public class WorkoutDataViewModel
-  {
-    private ObservableCollection<WorkoutData> _WorkoutData = new ObservableCollection<WorkoutData>();
-    public ObservableCollection<WorkoutData> WorkoutData
-    {
-      get { return this._WorkoutData; }
-    }
-  }
-
-  public class WorkoutDataSource : WorkoutDataViewModel
-  {
-    public WorkoutDataSource()
+    public DesignModeWorkoutData()
     {
       WorkoutData data = new WorkoutData();
       Lift lift1 = new Lift();
