@@ -16,10 +16,14 @@
 
     <!-- Collection of items displayed by this page -->
     <CollectionViewSource
+            x:Name="workingSetLog"
+            Source="{Binding WorkingSetLog}"
+            d:Source="{Binding WorkingSetLog, Source={d:DesignInstance Type=data:DesignModeWorkoutLog, IsDesignTimeCreatable=True}}"/>
+    
+    <CollectionViewSource
             x:Name="workoutDataSource"
             Source="{Binding WorkoutLog}"
-            d:Source="{Binding WorkoutLog, Source={d:DesignInstance Type=data:DesignModeWorkoutLog, IsDesignTimeCreatable=True}}"
-    />
+            d:Source="{Binding WorkoutLog, Source={d:DesignInstance Type=data:DesignModeWorkoutLog, IsDesignTimeCreatable=True}}"/>
     
     <common:LiftingSet2StringConverter x:Key="liftSet2String"/>
   </Page.Resources>
@@ -57,16 +61,21 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
 
-      <ListView
-            x:Name="progressListView">
-        <ListView.ItemTemplate>
+      <ItemsControl
+            x:Name="progressListView"
+            ItemsSource="{Binding Source={StaticResource workingSetLog}}">
+        <ItemsControl.ItemTemplate>
           <DataTemplate>
             <chart:Chart>
-              
+              <chart:LineSeries
+                Title="Title"
+                IndependentValueBinding="{Binding Weight}"
+                DependentValueBinding="{Binding Date}"
+                IsSelectionEnabled="False"/>
             </chart:Chart>
           </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
        
         <!-- Vertical scrolling item list -->
     <ListView

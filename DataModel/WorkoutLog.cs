@@ -38,12 +38,60 @@ namespace AntStrength.DataModel
     public int Reps { get; set; }
   }
 
+  public class WorkingSetLog
+  {
+    public DateTime Date { get; set; }
+    public string Name { get; set; }
+    public int Weight { get; set; }
+  }
+
   public class WorkoutDataViewModel
   {
     private ObservableCollection<WorkoutLog> _WorkoutLog = new ObservableCollection<WorkoutLog>();
     public ObservableCollection<WorkoutLog> WorkoutLog
     {
       get { return this._WorkoutLog; }
+    }
+
+    private ObservableCollection<WorkingSetLog> _WorkingSetLog = new ObservableCollection<WorkingSetLog>();
+    public ObservableCollection<WorkingSetLog> WorkingSetLog
+    {
+      get
+      {
+        return _WorkingSetLog;
+      }
+    }
+
+    public WorkoutDataViewModel()
+    {
+      WorkoutLog.CollectionChanged += WorkoutLog_CollectionChanged;
+    }
+
+    //[TODO:Comeback and check this]
+    void WorkoutLog_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+      // Need to update the WorkingSetLog
+      switch(e.Action)
+      {
+        case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+          // Add the new lifts to our working set log
+          var newLog = sender as ObservableCollection<WorkoutLog>;
+          if (null == newLog)
+            { throw new NotImplementedException(); }
+
+          foreach (var log in newLog)
+          {
+            var lifts = (from l in log.Lifts select l.Name).Distinct();
+            foreach( var lift in lifts)
+            {
+              WorkingSetLog.Add(new WorkingSetLog { Date = log.Date, Name = lift, Weight = 40 });
+            }
+          }
+
+          break;
+        default:
+          throw new NotImplementedException();
+      }
     }
   }
 
