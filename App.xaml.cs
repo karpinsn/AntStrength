@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntStrength.DataModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -53,7 +54,7 @@ namespace AntStrength
                 WorkoutDataSource workoutDataSource = (WorkoutDataSource)App.Current.Resources["workoutDataSource"];
                 if (null != workoutDataSource)
                 {
-                  workoutDataSource.LoadData();
+                  //workoutDataSource.LoadData();
                 }
 
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)

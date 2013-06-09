@@ -9,5 +9,5 @@
       <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding Path=Date.DayOfWeek}" VerticalAlignment="Bottom" FontSize="20"/>
     </Grid>
   </DataTemplate>
-
+  
 </ResourceDictionary>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AntStrength
+namespace AntStrength.DataModel
 {
   // Workout
   // - Multiple lifts
@@ -46,33 +46,36 @@ namespace AntStrength
       get { return this._WorkoutData; }
     }
 
-    public void LoadData( )
+    public WorkoutDataSource()
     {
-      LiftingSet set1 = new LiftingSet( );
-      set1.Weight = 50;
-      set1.Reps = 5;
-      Lift lift = new Lift( );
-      lift.Name = "Overhead Press";
-      lift.Sets.Add( set1 );
+      WorkoutData data = new WorkoutData();
+      Lift lift1 = new Lift();
+      lift1.Name = "Overhead Press";
+      lift1.Sets.Add(new LiftingSet { Weight = 50, Reps = 5 });
+      lift1.Sets.Add(new LiftingSet { Weight = 60, Reps = 5 });
+      lift1.Sets.Add(new LiftingSet { Weight = 70, Reps = 5 });
+      data.Lifts.Add(lift1);
 
-      WorkoutData data = new WorkoutData( );
-      data.Lifts.Add( lift );
-      data.Date = new DateTime(2013, 1, 3);
-
-      LiftingSet set2 = new LiftingSet();
-      set2.Weight = 50;
-      set2.Reps = 5;
       Lift lift2 = new Lift();
-      lift2.Name = "Overhead Press";
-      lift2.Sets.Add(set1);
+      lift2.Name = "Deadlift";
+      lift2.Sets.Add(new LiftingSet { Weight = 135, Reps = 5 });
+      lift2.Sets.Add(new LiftingSet { Weight = 225, Reps = 5 });
+      lift2.Sets.Add(new LiftingSet { Weight = 185, Reps = 3 });
+      data.Lifts.Add(lift2);
+      
+      data.Date = new DateTime(2013, 1, 3);
+      this.WorkoutData.Add( data );
 
       WorkoutData data2 = new WorkoutData();
-      data2.Lifts.Add(lift2);
+
+      Lift lift3 = new Lift();
+      lift3.Name = "Bench Press";
+      lift3.Sets.Add(new LiftingSet { Weight = 45, Reps = 5 });
+      lift3.Sets.Add(new LiftingSet { Weight = 65, Reps = 5 });
+      lift3.Sets.Add(new LiftingSet { Weight = 115, Reps = 2 });
+      data2.Lifts.Add(lift3);
+
       data2.Date = new DateTime(2013, 1, 5);
-
-
-
-      this.WorkoutData.Add( data );
       this.WorkoutData.Add(data2);
     }
   }

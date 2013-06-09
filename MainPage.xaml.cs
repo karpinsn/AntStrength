@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntStrength.DataModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -53,15 +54,15 @@ namespace AntStrength
       {
         // When this is a new page, select the first item automatically unless logical page
         // navigation is being used (see the logical page navigation #region below.)
-        if (!this.UsingLogicalPageNavigation() && this.itemsViewSource.View != null)
+        if (!this.UsingLogicalPageNavigation() && this.workoutDataSource.View != null)
         {
-          this.itemsViewSource.View.MoveCurrentToFirst();
+          this.workoutDataSource.View.MoveCurrentToFirst();
         }
       }
       else
       {
         // Restore the previously saved state associated with this page
-        if (pageState.ContainsKey("SelectedItem") && this.itemsViewSource.View != null)
+        if (pageState.ContainsKey("SelectedItem") && this.workoutDataSource.View != null)
         {
           // TODO: Invoke this.itemsViewSource.View.MoveCurrentTo() with the selected
           //       item as specified by the value of pageState["SelectedItem"]
@@ -77,9 +78,9 @@ namespace AntStrength
     /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
     protected override void SaveState(Dictionary<String, Object> pageState)
     {
-      if (this.itemsViewSource.View != null)
+      if (this.workoutDataSource.View != null)
       {
-        var selectedItem = this.itemsViewSource.View.CurrentItem;
+        var selectedItem = this.workoutDataSource.View.CurrentItem;
         // TODO: Derive a serializable navigation parameter and assign it to
         //       pageState["SelectedItem"]
       }
@@ -119,7 +120,7 @@ namespace AntStrength
     /// <param name="sender">The GridView (or ListView when the application is Snapped)
     /// displaying the selected item.</param>
     /// <param name="e">Event data that describes how the selection was changed.</param>
-    void ItemListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    void WorkoutListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       // Invalidate the view state when logical page navigation is in effect, as a change
       // in selection may cause a corresponding change in the current logical page.  When
@@ -136,13 +137,13 @@ namespace AntStrength
     /// <param name="e">Event data that describes how the back button was clicked.</param>
     protected override void GoBack(object sender, RoutedEventArgs e)
     {
-      if (this.UsingLogicalPageNavigation() && itemListView.SelectedItem != null)
+      if (this.UsingLogicalPageNavigation() && workoutListView.SelectedItem != null)
       {
         // When logical page navigation is in effect and there's a selected item that
         // item's details are currently displayed.  Clearing the selection will return to
         // the item list.  From the user's point of view this is a logical backward
         // navigation.
-        this.itemListView.SelectedItem = null;
+        this.workoutListView.SelectedItem = null;
       }
       else
       {
@@ -163,7 +164,7 @@ namespace AntStrength
     protected override string DetermineVisualState(ApplicationViewState viewState)
     {
       // Update the back button's enabled state when the view state changes
-      var logicalPageBack = this.UsingLogicalPageNavigation(viewState) && this.itemListView.SelectedItem != null;
+      var logicalPageBack = this.UsingLogicalPageNavigation(viewState) && this.workoutListView.SelectedItem != null;
       var physicalPageBack = this.Frame != null && this.Frame.CanGoBack;
       this.DefaultViewModel["CanGoBack"] = logicalPageBack || physicalPageBack;
 
