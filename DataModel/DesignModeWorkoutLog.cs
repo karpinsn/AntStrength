@@ -57,6 +57,17 @@ namespace AntStrength.DataModel
 
       data3.Date = new DateTime(2013, 1, 1);
       this.WorkoutLog.Add(data3);
+
+      WorkoutLog data4 = new WorkoutLog();
+      Lift Lift6 = new Lift();
+      Lift6.Name = "Bench Press";
+      Lift6.Sets.Add(new LiftingSet { Weight = 45, Reps = 5 });
+      Lift6.Sets.Add(new LiftingSet { Weight = 65, Reps = 5 });
+      Lift6.Sets.Add(new LiftingSet { Weight = 115, Reps = 2 });
+      data4.Lifts.Add(Lift6);
+
+      data4.Date = new DateTime(2012, 12, 28);
+      this.WorkoutLog.Add(data4);
     }
   }
 }

@@ -7,7 +7,7 @@
     xmlns:local="using:AntStrength"
     xmlns:data="using:AntStrength.DataModel"
     xmlns:common="using:AntStrength.Common"
-    xmlns:chart="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+    xmlns:charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -66,19 +66,29 @@
             ItemsSource="{Binding Source={StaticResource workingSetLog}}">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
-            <chart:Chart Title="{Binding Name}">
-              <chart:Chart.Series>
-                  <chart:PieSeries
-                  ItemsSource="{Binding DateWeight}"
-                  IndependentValueBinding="{Binding Item1}"
-                  DependentValueBinding="{Binding Item2}"
-                  IsSelectionEnabled="False"/>
-              </chart:Chart.Series>
-            </chart:Chart>
+            <charting:Chart
+              Title="{Binding Name}">
+              <charting:LineSeries
+                    ItemsSource="{Binding DateWeight}"
+                    IndependentValueBinding="{Binding Item1}"
+                    DependentValueBinding="{Binding Item2}"
+                    IsSelectionEnabled="False"/>
+              <charting:Chart.LegendStyle>
+                <Style TargetType="FrameworkElement">
+                  <Setter Property="Width" Value="0"/>
+                </Style>
+              </charting:Chart.LegendStyle>
+            </charting:Chart>
+            
           </DataTemplate>
         </ItemsControl.ItemTemplate>
       </ItemsControl>
        
+      <!-- 
+                          IndependentValueBinding="{Binding DateWeight.Item1}"
+                    DependentValueBinding="{Binding DateWeight.Item2}"
+      -->
+      
         <!-- Vertical scrolling item list -->
     <ListView
             x:Name="workoutListView"
